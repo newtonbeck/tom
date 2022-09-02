@@ -37,4 +37,20 @@ class ComponentTest {
         assertEquals(new FanIn(1), component.fanIn());
     }
 
+    @Test
+    public void component_instability_should_be_available() {
+        var component = new Component("org.tom.domain");
+
+        component.fanOut().increase();
+
+        component.fanIn().increase();
+        component.fanIn().increase();
+
+        var expectedInstability = new Instability(
+                new FanOut(1),
+                new FanIn(2)
+        );
+        assertEquals(expectedInstability, component.instability());
+    }
+
 }

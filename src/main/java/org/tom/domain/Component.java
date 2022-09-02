@@ -35,4 +35,7 @@ public class Component {
         return Objects.hash(name);
     }
 
+    public Instability instability() {
+        return new Instability(this.fanOut, this.fanIn);
+    }
 }
