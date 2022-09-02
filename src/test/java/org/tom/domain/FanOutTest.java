@@ -19,4 +19,11 @@ class FanOutTest {
         assertEquals(new FanOut(1), fanOut);
     }
 
+    @Test
+    public void value_should_be_retrieved_by_accessor() {
+        var fanOut = new FanOut(3);
+
+        assertEquals(3, fanOut.value());
+    }
+
 }
