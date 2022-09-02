@@ -21,4 +21,12 @@ class ComponentTest {
         assertEquals("Component name can not be null", exception.getMessage());
     }
 
+    @Test
+    public void component_fan_out_should_increase() {
+        var component = new Component("org.tom.domain");
+        component.fanOut().increase();
+
+        assertEquals(new FanOut(1), component.fanOut());
+    }
+
 }

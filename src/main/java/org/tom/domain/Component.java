@@ -5,9 +5,11 @@ import java.util.Objects;
 public class Component {
 
     private final String name;
+    private final FanOut fanOut;
 
     public Component(String name) {
         this.name = Objects.requireNonNull(name, "Component name can not be null");
+        this.fanOut = new FanOut();
     }
 
     @Override
@@ -23,4 +25,7 @@ public class Component {
         return Objects.hash(name);
     }
 
+    public FanOut fanOut() {
+        return this.fanOut;
+    }
 }
