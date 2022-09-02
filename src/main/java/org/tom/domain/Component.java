@@ -22,6 +22,14 @@ public class Component {
         return this.fanIn;
     }
 
+    public Instability instability() {
+        return new Instability(this.fanOut, this.fanIn);
+    }
+
+    public String name() {
+        return this.name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,7 +43,4 @@ public class Component {
         return Objects.hash(name);
     }
 
-    public Instability instability() {
-        return new Instability(this.fanOut, this.fanIn);
-    }
 }

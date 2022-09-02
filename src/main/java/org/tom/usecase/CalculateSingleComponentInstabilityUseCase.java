@@ -24,8 +24,13 @@ public class CalculateSingleComponentInstabilityUseCase {
         this.components.findBy(name).ifPresentOrElse(
                 component -> {
                     var instability = component.instability();
-                    if (instability.value() == Double.NaN) {
+                    if (Double.isNaN(instability.value())) {
                         callback.instabilityIsUndefined(name);
+                    } else {
+                        callback.instabilityIsCalculated(
+                                component.name(),
+                                instability.value()
+                        );
                     }
                 },
                 () -> callback.componentNotFound(name)
