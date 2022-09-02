@@ -1,7 +1,10 @@
 package org.tom.usecase;
 
 import org.junit.jupiter.api.Test;
+import org.tom.domain.Component;
 import org.tom.helper.InMemoryComponents;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,8 +21,31 @@ class CalculateSingleComponentInstabilityUseCaseTest {
             }
 
             @Override
-            public void instabilityIsUndefined() {
+            public void instabilityIsUndefined(String name) {
                 fail();
+            }
+
+            @Override
+            public void instabilityIsCalculated(String name, double instability) {
+                fail();
+            }
+        });
+    }
+
+    @Test
+    public void instability_is_undefined_should_invoked_when_components_instability_is_0_divided_by_0() {
+        var components = Map.of("org.tom.domain", new Component("org.tom.domain"));
+        var useCase = new CalculateSingleComponentInstabilityUseCase(new InMemoryComponents(components));
+
+        useCase.calculate("org.tom.domain", new CalculateSingleComponentInstabilityUseCase.Callback() {
+            @Override
+            public void componentNotFound(String name) {
+                fail();
+            }
+
+            @Override
+            public void instabilityIsUndefined(String name) {
+                assertEquals("org.tom.domain", name);
             }
 
             @Override

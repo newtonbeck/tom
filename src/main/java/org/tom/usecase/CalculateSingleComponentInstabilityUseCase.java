@@ -14,7 +14,7 @@ public class CalculateSingleComponentInstabilityUseCase {
 
         void componentNotFound(String name);
 
-        void instabilityIsUndefined();
+        void instabilityIsUndefined(String name);
 
         void instabilityIsCalculated(String name, double instability);
 
@@ -22,7 +22,12 @@ public class CalculateSingleComponentInstabilityUseCase {
 
     public void calculate(String name, Callback callback) {
         this.components.findBy(name).ifPresentOrElse(
-                component -> System.out.println(component),
+                component -> {
+                    var instability = component.instability();
+                    if (instability.value() == Double.NaN) {
+                        callback.instabilityIsUndefined(name);
+                    }
+                },
                 () -> callback.componentNotFound(name)
         );
     }
