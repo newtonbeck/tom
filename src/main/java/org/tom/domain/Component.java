@@ -6,10 +6,20 @@ public class Component {
 
     private final String name;
     private final FanOut fanOut;
+    private final FanIn fanIn;
 
     public Component(String name) {
         this.name = Objects.requireNonNull(name, "Component name can not be null");
         this.fanOut = new FanOut();
+        this.fanIn = new FanIn();
+    }
+
+    public FanOut fanOut() {
+        return this.fanOut;
+    }
+
+    public FanIn fanIn() {
+        return this.fanIn;
     }
 
     @Override
@@ -25,7 +35,4 @@ public class Component {
         return Objects.hash(name);
     }
 
-    public FanOut fanOut() {
-        return this.fanOut;
-    }
 }

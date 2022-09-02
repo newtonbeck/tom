@@ -29,4 +29,12 @@ class ComponentTest {
         assertEquals(new FanOut(1), component.fanOut());
     }
 
+    @Test
+    public void component_fan_in_should_increase() {
+        var component = new Component("org.tom.domain");
+        component.fanIn().increase();
+
+        assertEquals(new FanIn(1), component.fanIn());
+    }
+
 }
