@@ -51,4 +51,11 @@ class InstabilityTest {
         assertTrue(instability.value() <= 1);
     }
 
+    @Test
+    public void fan_out_and_fan_in_zero_should_be_not_a_number() {
+        var instability = new Instability(new FanOut(), new FanIn());
+
+        assertEquals(Double.NaN, instability.value());
+    }
+
 }
