@@ -4,11 +4,15 @@ import java.util.Objects;
 
 public class Instability {
 
-    private final int value;
+    private final double value;
 
     public Instability(FanOut fanOut, FanIn fanIn) {
         // TODO deal with division by zero later, maybe with a null object
-        this.value = fanOut.value() / (fanOut.value() + fanIn.value());
+        this.value = ((double) fanOut.value()) / (fanOut.value() + fanIn.value());
+    }
+
+    public double value() {
+        return this.value;
     }
 
     @Override
